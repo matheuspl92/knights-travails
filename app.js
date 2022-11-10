@@ -134,9 +134,17 @@ const knightMoves = (start, end) => {
     const board = BoardFactory();
     const rootNode = board.getNode(start);
     const targetNode = board.getNode(end);
+    const movesArray = _searchPath(rootNode, targetNode);
 
-    return _searchPath(rootNode, targetNode);
+    if (movesArray.length > 1) {
+        console.log(`You made it in ${movesArray.length} moves! Here's your path:`);
+    } else {
+        console.log(`You made it in 1 move! Here's your path:`);
+    }
+    movesArray.forEach(move => {
+        console.log(`[${move.toString()}]`);
+    });
 
 };
 
-console.log(knightMoves([0, 0], [7, 7]).toString());
+knightMoves([0, 0], [2,3]);
