@@ -24,13 +24,9 @@ const BoardFactory = () => {
         if (positionArray[0] >= 0 && positionArray[0] < 8 && positionArray[1] >= 0 && positionArray[1] < 8) {
 
             for (let i = 0; i < boardArray.length; i += 1) {
-                /*console.log("TEST")
-                console.log(positionArray.toString());
-                console.log(boardArray[i].position.toString());*/
                 if (positionArray.toString() === boardArray[i].position.toString()) return boardArray[i];
             }
         } else {
-            //console.log("ERROR: INVALID BOARD POSITION");
             return null;
         }
     };
@@ -38,7 +34,6 @@ const BoardFactory = () => {
     const _linkNodes = (() => {
         for (let i = 0; i < boardArray.length; i += 1) {
             const position = boardArray[i].position;
-            //console.log(position)
             const neighborArray = [];
             neighborArray.push([position[0] + 1, position[1] + 2],
                 [position[0] + 1, position[1] - 2],
@@ -48,8 +43,6 @@ const BoardFactory = () => {
                 [position[0] + 2, position[1] - 1],
                 [position[0] - 2, position[1] + 1],
                 [position[0] - 2, position[1] - 1]);
-
-            //console.log(neighborArray);
 
             for (let j = 0; j < neighborArray.length; j += 1) {
                 const neighborNode = _getNode(neighborArray[j]);
@@ -58,30 +51,6 @@ const BoardFactory = () => {
                 }
             }
         }
-        /*boardArray.forEach((node) => {
-            const position = node.position;
-            console.log(position)
-            const neighborArray = [];
-            neighborArray.push([position[0] + 1, position[1] + 2],
-                [position[0] + 1, position[1] - 2],
-                [position[0] - 1, position[1] + 2],
-                [position[0] - 1, position[1] - 2],
-                [position[0] + 2, position[1] + 1],
-                [position[0] + 2, position[1] - 1],
-                [position[0] - 2, position[1] + 1],
-                [position[0] - 2, position[1] - 1]);
-
-            console.log(neighborArray)
-            neighborArray.forEach((nodePosition) => {
-                console.log(nodePosition);
-                const neighborNode = _getNode(nodePosition);
-                console.log(neighborNode);
-                if (neighborNode !== null) {
-                    node.neighborsNodes.push(neighborNode);
-                }
-            })
-
-        });*/
     })();
 
     return {
