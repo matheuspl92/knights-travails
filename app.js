@@ -30,7 +30,7 @@ const BoardFactory = () => {
                 if (positionArray.toString() === boardArray[i].position.toString()) return boardArray[i];
             }
         } else {
-            console.log("ERROR: INVALID BOARD POSITION");
+            //console.log("ERROR: INVALID BOARD POSITION");
             return null;
         }
     };
@@ -90,6 +90,53 @@ const BoardFactory = () => {
     }
 };
 
-const board = BoardFactory();
-console.log(board.nodes);
-console.log(board.getNode([0, 0]).neighborsNodes);
+const knightMoves = (start, end) => {
+
+    const _searchPath = (node, target, path = [], resultsArray = [], isFirstCall = true, depth = 0) => {
+        if (depth > 7) return null;
+        if (node === target) {
+            path.push(node.position);
+            return path;
+        }
+
+        const newPath = path.slice();
+        newPath.push(node.position);
+        let result = null;
+
+
+        for (let i = 0; i < node.neighborsNodes.length; i += 1) {
+            result = _searchPath(node.neighborsNodes[i], target, newPath, resultsArray, false, depth + 1);
+            if (result !== null) {
+                resultsArray.push(result);
+            }
+        }
+
+        if (isFirstCall) {
+
+            minValue = Infinity;
+            minIndex = 0;
+            for (let i = 0; i < resultsArray.length; i += 1) {
+                if (resultsArray[i].length < minValue) {
+                    minValue = resultsArray[i].length;
+                    minIndex = i;
+                }
+            }
+
+            return resultsArray[minIndex];
+
+        } else {
+
+            return null;
+
+        }
+    };
+
+    const board = BoardFactory();
+    const rootNode = board.getNode(start);
+    const targetNode = board.getNode(end);
+
+    return _searchPath(rootNode, targetNode);
+
+};
+
+console.log(knightMoves([0, 0], [7, 7]).toString());
