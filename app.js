@@ -147,4 +147,4 @@ const knightMoves = (start, end) => {
 
 };
 
-knightMoves([0, 0], [2,3]);
+knightMoves([0, 0], [7, 7]);
