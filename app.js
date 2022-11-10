@@ -105,10 +105,12 @@ const knightMoves = (start, end) => {
     const targetNode = board.getNode(end);
     const movesArray = _searchPath(rootNode, targetNode);
 
-    if (movesArray.length > 1) {
-        console.log(`You made it in ${movesArray.length} moves! Here's your path:`);
-    } else {
+    if (movesArray.length > 2) {
+        console.log(`You made it in ${movesArray.length - 1} moves! Here's your path:`);
+    } else if (movesArray.length === 2) {
         console.log(`You made it in 1 move! Here's your path:`);
+    } else {
+        console.log(`You have not moved! Here's your starting and ending position:`);
     }
     movesArray.forEach(move => {
         console.log(`[${move.toString()}]`);
